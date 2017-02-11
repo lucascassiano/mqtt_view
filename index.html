@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"></link>
+    <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css"></link>-->
+    <link rel="stylesheet" href="css/font-awesome.min.css"></link>
+    <!--<link rel="stylesheet" href="css/flat-ui.css"></link>-->
+    <link rel="stylesheet" href="css/bootstrap-flat.min.css"></link>
+
+    <style>
+        .center-element {
+            position: relative;
+            top: 100px;
+            /*transform: translateY(-50%);*/
+        }
+
+        .my-textarea {
+            display: block;
+            /*reset from inline*/
+            width: 100%;
+            margin: 0;
+
+            height: 100%;
+            overflow: auto;
+            bottom: 10px;
+            border: 0px #000 solid;
+
+            resize: none;
+            background-color: #f0f0f0;
+            /* Remove this if you want the user to resize the textarea */
+        }
+
+        .fullScreen {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="screen1" class="vertical-center text-center fullScreen">
+        <div class="container center-element">
+            <h1>MQTT Viewer</h1>
+            <!-- All of the Node.js APIs are available in this renderer process. -->
+            We are using Node.js
+            <div class="row">
+                <div class="input-group">
+                    <div class="input-group-addon">MQTT Server</div>
+                    <input type="text" class="form-control" id="server_address" placeholder="mqtt.server.com">
+                </div>
+                <!--  <div class="input-group">
+                        <div class="input-group-addon">port</div>
+                        <input type="number" class="form-control" id="server_port" placeholder="1180" value="1800">
+                    </div>-->
+            </div>
+
+            <div class="row" style="margin-top:12px">
+                <button id="connect" class="btn btn-primary">Connect</button>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div id="alert_msg" class="alert alert-danger">
+                <strong>Warning!</strong> Indicates a warning that might need attention.
+            </div>
+        </div>
+    </div>
+
+    <!--Screen2-->
+
+    <div id="screen2" class="text-center">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a id="go_home" class="navbar-brand" href="#"><i class="fa fa-home" aria-hidden="true"></i> MQTT Viewer</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a id="open-github" href="https://github.com/lucascassiano/electron"><i class="fa fa-github" aria-hidden="true"></i> About</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Export<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="export-txt" href="#">Console Text <span class="badge">.txt</span></a></li>
+                            <li><a href="#">Console Data <span class="badge">.csv</span></a></li>
+                            <li><a href="#">Image</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+
+        <div class="container ">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">inTopic</span>
+                        <input id="inTopic" type="text" class="form-control" placeholder="inTopic/values">
+                        <span class="input-group-btn">
+                          <button id="subscribe_in" class="btn btn-primary" type="button">Subscribe</button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </div>
+                <!-- /.col-lg-6 -->
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">outTopic</span>
+                        <input id="outTopic" type="text" class="form-control" placeholder="outTopic/values">
+
+                    </div>
+                    <!-- /input-group -->
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            <!-- /.row -->
+            <hr>
+            <div class="container">
+                <div class="input-group">
+                    <span class="input-group-addon">Message</span>
+                    <input id="message" type="text" class="form-control" placeholder="outTopic/values">
+                    <span class="input-group-btn">
+                  <button id="publish" class="btn btn-success" type="button">Publish on /<span id="out_label"></span> <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </span>
+                </div>
+            </div>
+            <div class="row fullScreen text-center">
+                <h5><i class="fa fa-terminal" aria-hidden="true"></i> <span id="label_console_in">you need to subscribe in a topic</span> </h5>
+                <textarea class="my-textarea" id="in_console" readonly></textarea>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        window.$ = window.jQuery = require('jquery');
+    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/mqtt_client.js"></script>
+</body>
+
+<script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+</script>
+
+</html>

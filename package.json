@@ -1,0 +1,37 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build --mac",
+    "export": "build --all"
+  },
+  "repository": "https://github.com/lucascassiano/electron",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start"
+  ],
+  "author": "lucascassiano - cassiano@mit.edu",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.4.1",
+    "electron-builder": "^13.5.0",
+    "electron-packager": "^8.5.1"
+  },
+  "dependencies": {
+    "mqtt": "^2.3.1"
+  },
+  "build": {
+    "appId": "edu.mit.media.cassiano",
+    "mac": {
+      "category": "utility"
+    },
+    "win": {
+      "iconUrl": "(windows-only) https link to icon"
+    }
+  }
+}
